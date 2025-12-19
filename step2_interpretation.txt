@@ -1,0 +1,82 @@
+INTERPRETATION GUIDE: Step 2 - Compare Brain Scans & Extract Features
+======================================================================
+
+This guide helps you understand what the results from step2_compare_and_extract_features.ipynb mean.
+
+WHAT THIS NOTEBOOK DOES:
+------------------------
+This notebook compares brain scans between Demented and Nondemented groups, extracts numerical features, and prepares data for machine learning.
+
+KEY OUTPUTS TO UNDERSTAND:
+--------------------------
+
+1. Diagnosis Distribution
+   - Shows how many subjects in each group
+   - Example: 52 Nondemented, 23 Demented
+   - Note: Imbalanced data is common in medical studies
+
+2. Average Brain Images (brain_comparison_average.png)
+   - Nondemented Average: The "typical" healthy brain
+   - Demented Average: The "typical" brain with dementia
+   - Difference Image: Shows where groups differ
+     * Red/Positive = Nondemented has MORE tissue (healthier)
+     * Blue/Negative = Demented has MORE tissue (or Nondemented has less)
+   - What to look for: Alzheimer's causes brain shrinkage (atrophy), so you might see red areas where healthy brains have more tissue
+
+3. Feature Comparison Results (feature_comparison_results.csv)
+   - p-value: Probability the difference happened by chance
+     * p < 0.05 = Statistically significant (likely real difference)
+     * p > 0.05 = Not significant (could be random)
+   - Difference: How much groups differ (Nondemented mean - Demented mean)
+   - Interpretation: Lower p-values = better features for ML models
+
+4. Feature Comparison Box Plots (feature_comparison.png)
+   - Box plots show feature distributions for both groups
+   - Box = Middle 50% of values
+   - Line in box = Median (middle value)
+   - Whiskers = Range of most values
+   - What to look for:
+     * Boxes that don't overlap = groups are different
+     * Higher boxes = higher values for that group
+     * Clear separation = useful for classification
+
+5. Extracted Features (extracted_features.csv)
+   - 22 features per subject
+   - Statistical features: mean, std, percentiles (describe intensity distribution)
+   - Volume features: total_volume, weighted_volume (measure brain size)
+   - Regional features: left/right hemisphere, front/back, top/bottom (compare brain regions)
+   - These numbers summarize complex 3D brain images into data ML can use
+
+6. Why Some Features Might Not Be Significant
+   - Small sample size (75 subjects) makes it harder to detect small differences
+   - Our features are basic - more sophisticated features might show stronger differences
+   - This is normal! Even if features aren't significant individually, ML models can find patterns by combining multiple features
+
+WHAT THE NUMBERS MEAN:
+----------------------
+- mean_intensity: Average brightness of brain tissue
+- total_volume: Number of brain voxels (pixels in 3D)
+- hemisphere_asymmetry: Difference between left and right brain
+- p25_intensity: 25th percentile (25% of values are below this)
+
+COMMON QUESTIONS:
+-----------------
+Q: Why are no features statistically significant (p > 0.05)?
+A: This is common with small datasets. ML models can still work by combining multiple weak features.
+
+Q: What if the difference image doesn't show clear patterns?
+A: That's okay! The differences might be subtle. ML models are good at finding patterns we can't see.
+
+Q: Are 22 features enough?
+A: For a beginner project, yes. In research, you might extract hundreds or thousands of features.
+
+Q: Why extract features instead of using raw images?
+A: Traditional ML models need numerical features. CNNs (Step 4) can use raw images directly.
+
+NEXT STEPS:
+-----------
+After running this notebook, you should have:
+- extracted_features.csv and .pkl files ready for ML
+- Understanding of which features differ between groups
+- Ready to move to Step 3 (machine learning)
+
