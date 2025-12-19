@@ -21,10 +21,12 @@ Comptutational_Neuroscience_Project/
 │   ├── step2_compare_and_extract_features.ipynb  # Feature extraction and comparison
 │   └── step3_machine_learning.ipynb     # ML model training and evaluation
 ├── output_images/                        # All visualization outputs
-│   ├── age_distribution.png
 │   ├── brain_scan_example.png
+│   ├── brain_slices_example.png
 │   ├── brain_comparison_average.png
 │   ├── confusion_matrices.png
+│   ├── roc_curves.png
+│   ├── feature_importance.png
 │   └── ... (other visualization images)
 ├── Data/                                 # OASIS-1 dataset (not in repo - download separately)
 └── README.md                             # This file
