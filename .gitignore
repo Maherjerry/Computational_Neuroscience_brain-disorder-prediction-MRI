@@ -30,14 +30,18 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Model files (optional - uncomment if you don't want to track trained models)
-# *.pkl
+# Model files (large - exclude trained models)
+*.pkl
 
-# Output images (optional - uncomment if you don't want to track generated images)
-# *.png
+# Large CSV data files (exclude extracted features - users can regenerate)
+extracted_features.csv
+extracted_features.pkl
+feature_comparison_results.csv
+model_performance_summary.csv
+feature_importance.csv
 
-# CSV files with data (optional - uncomment if you don't want to track data files)
-# *.csv
+# Keep output images for README visualization
+# *.png (commented out - we want to include PNG images)
 
 # Keep interpretation files and README
 !*.txt
