@@ -43,7 +43,13 @@ feature_importance.csv
 # Keep output images for README visualization
 # *.png (commented out - we want to include PNG images)
 
-# Keep interpretation files and README
-!*.txt
+# Keep only README in root
 !README.md
+
+# Exclude other documentation and old files
+*.txt
+!README.md
+Project_Guidelines.txt
+STEP_1_EXPLORE_DATA.md
+explore_oasis_data.ipynb
 
