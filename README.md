@@ -16,13 +16,17 @@ This project explores brain MRI data to build machine learning models that can d
 
 ```
 Comptutational_Neuroscience_Project/
-├── step1_explore_data.ipynb              # Data exploration and visualization
-├── step2_compare_and_extract_features.ipynb  # Feature extraction and comparison
-├── step3_machine_learning.ipynb          # ML model training and evaluation
-├── step1_interpretation.txt              # Guide to understanding Step 1 results
-├── step2_interpretation.txt              # Guide to understanding Step 2 results
-├── step3_interpretation.txt              # Guide to understanding Step 3 results
-├── Data/                                 # OASIS-1 dataset (not in repo)
+├── scripts/                              # All Jupyter notebooks
+│   ├── step1_explore_data.ipynb         # Data exploration and visualization
+│   ├── step2_compare_and_extract_features.ipynb  # Feature extraction and comparison
+│   └── step3_machine_learning.ipynb     # ML model training and evaluation
+├── output_images/                        # All visualization outputs
+│   ├── age_distribution.png
+│   ├── brain_scan_example.png
+│   ├── brain_comparison_average.png
+│   ├── confusion_matrices.png
+│   └── ... (other visualization images)
+├── Data/                                 # OASIS-1 dataset (not in repo - download separately)
 └── README.md                             # This file
 ```
 
@@ -30,7 +34,7 @@ Comptutational_Neuroscience_Project/
 
 ## Step 1: Data Exploration
 
-**Notebook**: `step1_explore_data.ipynb`
+**Notebook**: `scripts/step1_explore_data.ipynb`
 
 **What it does**:
 - Loads OASIS-1 metadata and brain scan files
@@ -38,9 +42,8 @@ Comptutational_Neuroscience_Project/
 - Visualizes brain MRI scans in multiple views
 - Analyzes age, MMSE scores, and diagnosis distribution
 
-**Key Outputs**:
-- `diagnosis_distribution.png` - Distribution of subjects by diagnosis
-- `age_distribution.png` - Age distribution histogram
+**Key Outputs** (saved to `output_images/` folder):
+- `diagnosis_distribution_step2.png` - Distribution of subjects by diagnosis
 - `mmse_distribution.png` - MMSE score distribution
 - `brain_scan_example.png` - Example brain scan (three views)
 - `brain_slices_example.png` - Multiple brain slices
@@ -51,17 +54,14 @@ Comptutational_Neuroscience_Project/
 - MMSE scores range from 17-30 (lower = more cognitive impairment)
 - Brain scans are 3D images (256×256×128 voxels) stored as .hdr/.img files
 
-![Age Distribution](age_distribution.png)
-*Age distribution of subjects in the dataset*
-
-![Brain Scan Example](brain_scan_example.png)
+![Brain Scan Example](output_images/brain_scan_example.png)
 *Example brain MRI scan showing three orthogonal views*
 
 ---
 
 ## Step 2: Compare & Extract Features
 
-**Notebook**: `step2_compare_and_extract_features.ipynb`
+**Notebook**: `scripts/step2_compare_and_extract_features.ipynb`
 
 **What it does**:
 - Separates subjects into Demented and Nondemented groups (based on CDR scores)
@@ -71,11 +71,10 @@ Comptutational_Neuroscience_Project/
 - Saves features for machine learning
 
 **Key Outputs**:
-- `diagnosis_distribution_step2.png` - Group distribution
-- `brain_comparison_average.png` - Average brains and difference map
-- `feature_comparison.png` - Box plots of top significant features
-- `extracted_features.csv` / `extracted_features.pkl` - All extracted features
-- `feature_comparison_results.csv` - Statistical comparison results
+- `output_images/diagnosis_distribution_step2.png` - Group distribution
+- `output_images/brain_comparison_average.png` - Average brains and difference map
+- `output_images/feature_comparison.png` - Box plots of top significant features
+- Note: Extracted features CSV/PKL files are generated when running the notebook (not in repo)
 
 **Features Extracted**:
 - **Statistical**: mean, std, percentiles of intensity values
@@ -89,17 +88,17 @@ Comptutational_Neuroscience_Project/
 - Some features show trends (though not all statistically significant)
 - Feature extraction enables traditional ML models to work with image data
 
-![Brain Comparison](brain_comparison_average.png)
+![Brain Comparison](output_images/brain_comparison_average.png)
 *Average brain images: Nondemented (left), Demented (middle), and their difference (right)*
 
-![Feature Comparison](feature_comparison.png)
+![Feature Comparison](output_images/feature_comparison.png)
 *Top 5 features showing differences between groups*
 
 ---
 
 ## Step 3: Machine Learning Classification
 
-**Notebook**: `step3_machine_learning.ipynb`
+**Notebook**: `scripts/step3_machine_learning.ipynb`
 
 **What it does**:
 - Loads extracted features from Step 2
@@ -113,12 +112,11 @@ Comptutational_Neuroscience_Project/
 2. **Random Forest**: Ensemble method that captures non-linear patterns
 
 **Key Outputs**:
-- `confusion_matrices.png` - Confusion matrices for both models
-- `roc_curves.png` - ROC curves comparing model performance
-- `feature_importance.png` - Most important features for classification
-- `cv_results.png` - Cross-validation results
-- `lr_model.pkl` / `rf_model.pkl` - Trained models (saved)
-- `model_performance_summary.csv` - Performance metrics
+- `output_images/confusion_matrices.png` - Confusion matrices for both models
+- `output_images/roc_curves.png` - ROC curves comparing model performance
+- `output_images/feature_importance.png` - Most important features for classification
+- `output_images/cv_results.png` - Cross-validation results
+- Note: Trained model files (.pkl) and CSV summaries are generated when running the notebook (not in repo)
 
 **What we learned**:
 - Both models can distinguish between Demented and Nondemented subjects
@@ -126,13 +124,13 @@ Comptutational_Neuroscience_Project/
 - Feature importance reveals which brain characteristics matter most
 - Cross-validation provides more reliable performance estimates than single train/test split
 
-![Confusion Matrices](confusion_matrices.png)
+![Confusion Matrices](output_images/confusion_matrices.png)
 *Confusion matrices showing prediction accuracy for both models*
 
-![ROC Curves](roc_curves.png)
+![ROC Curves](output_images/roc_curves.png)
 *ROC curves comparing model performance (higher AUC = better)*
 
-![Feature Importance](feature_importance.png)
+![Feature Importance](output_images/feature_importance.png)
 *Top 10 most important features for classification*
 
 ---
@@ -171,23 +169,16 @@ Comptutational_Neuroscience_Project/
 
 ### Running the Notebooks
 
-1. **Step 1**: Run `step1_explore_data.ipynb` to explore the data
+1. **Step 1**: Run `scripts/step1_explore_data.ipynb` to explore the data
    - Run all cells sequentially
 
-2. **Step 2**: Run `step2_compare_and_extract_features.ipynb` to extract features
+2. **Step 2**: Run `scripts/step2_compare_and_extract_features.ipynb` to extract features
    - Requires Step 1 to be completed
    - May take a few minutes to load all brain scans
 
-3. **Step 3**: Run `step3_machine_learning.ipynb` to train ML models
+3. **Step 3**: Run `scripts/step3_machine_learning.ipynb` to train ML models
    - Requires Step 2 to be completed
    - Models will be saved as .pkl files
-
-### Understanding Results
-
-Each step has a corresponding interpretation guide:
-- `step1_interpretation.txt` - Understanding Step 1 outputs
-- `step2_interpretation.txt` - Understanding Step 2 outputs  
-- `step3_interpretation.txt` - Understanding Step 3 outputs
 
 ---
 
@@ -205,14 +196,6 @@ Each step has a corresponding interpretation guide:
 - Comparison with traditional ML results
 - Visualization of what the CNN learned (attention maps)
 - Potentially higher accuracy than feature-based approaches
-
-### Other Future Enhancements
-
-- **More sophisticated features**: Brain segmentation, cortical thickness, hippocampal volume
-- **Data augmentation**: Increase dataset size artificially
-- **Hyperparameter tuning**: Optimize model parameters
-- **Ensemble methods**: Combine multiple models for better performance
-- **Transfer learning**: Use pre-trained models on larger datasets
 
 ---
 
@@ -241,6 +224,5 @@ This project is for educational purposes. The OASIS dataset has its own usage te
 ---
 
 ## Contact
-
-For questions or issues, please refer to the interpretation guides or review the notebook comments for detailed explanations of each step.
+Muhammed Bah: muhabah@mrc.gm
 
